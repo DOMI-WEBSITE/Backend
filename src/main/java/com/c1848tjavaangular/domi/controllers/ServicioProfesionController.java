@@ -66,7 +66,7 @@ public class ServicioProfesionController {
     }
 
     @PostMapping("/servicio-profesion")
-    public ResponseEntity<ServicioProfesionDto> save(@RequestHeader("token") String token, @RequestBody ServicioProfesionDto servicioProfesionDto){
+    public ResponseEntity<ServicioProfesionDto> save(@RequestHeader("Authorization") String token, @RequestBody ServicioProfesionDto servicioProfesionDto){
         Integer idUsuario = jwtService.getIdUsuarioFromToken(token);
         return new ResponseEntity<>(servicioProfesionService.save(idUsuario, servicioProfesionDto), HttpStatus.CREATED);
     }

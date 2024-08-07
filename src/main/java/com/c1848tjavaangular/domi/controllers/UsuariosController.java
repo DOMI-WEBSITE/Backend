@@ -39,14 +39,14 @@ public class UsuariosController {
     }
 
     @PutMapping("/usuario/password")
-    public ResponseEntity<?> updatePassword(@RequestHeader("token") String token, @RequestBody PasswordDto passworDto) {
+    public ResponseEntity<?> updatePassword(@RequestHeader("Authorization") String token, @RequestBody PasswordDto passworDto) {
         Integer idUsuario = jwtService.getIdUsuarioFromToken(token);
         usuariosService.updatePassword(idUsuario, passworDto);
-        return ResponseEntity.ok().body("Contraseña actualizada! ");
+        return ResponseEntity.ok().body("Contraseña actualizada!");
     }
 
     @GetMapping("/usuario/perfil")
-    public ResponseEntity<?> getUsuario(@RequestHeader("token") String token){
+    public ResponseEntity<?> getUsuario(@RequestHeader("Authorization") String token){
         Integer idUsuario = jwtService.getIdUsuarioFromToken(token);
         UsuariosDto usuariosDto = usuariosService.findById(idUsuario);
 

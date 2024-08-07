@@ -38,7 +38,7 @@ public class SolicitudesController {
     }
 
     @PostMapping("/solicitud")
-    public ResponseEntity<SolicitudesDto> save(@RequestHeader("token") String token,@RequestBody SolicitudesDto solicitudesDto){
+    public ResponseEntity<SolicitudesDto> save(@RequestHeader("Authorization") String token,@RequestBody SolicitudesDto solicitudesDto){
         Integer idUsuario = jwtService.getIdUsuarioFromToken(token);
         // Obtener el email del usuario profesional
         String emailUsuario = servicioProfesionService.getEmailUsuario(solicitudesDto.getIdServicioProfesion());
@@ -66,37 +66,37 @@ public class SolicitudesController {
     }
 
     @GetMapping("/solicitud/profesional")
-    public ResponseEntity<List<SolicitudesUsuarioDto>> getSolicitudesProfesional(@RequestHeader("token") String token){
+    public ResponseEntity<List<SolicitudesUsuarioDto>> getSolicitudesProfesional(@RequestHeader("Authorization") String token){
         Integer idUsuario = jwtService.getIdUsuarioFromToken(token);
         return ResponseEntity.ok(solicitudesService.findSolicitudesByProfessionalId(idUsuario));
     }
 
     @GetMapping("/solicitud/profesional/terminada")
-    public ResponseEntity<List<SolicitudesUsuarioDto>> getSolicitudesTerminadasProfesional(@RequestHeader("token") String token){
+    public ResponseEntity<List<SolicitudesUsuarioDto>> getSolicitudesTerminadasProfesional(@RequestHeader("Authorization") String token){
         Integer idUsuario = jwtService.getIdUsuarioFromToken(token);
         return ResponseEntity.ok(solicitudesService.findSolicitudesTerminadasByProfessionalId(idUsuario));
     }
 
     @GetMapping("/solicitud/profesional/pendiente")
-    public ResponseEntity<List<SolicitudesUsuarioDto>> getSolicitudesPendientesPorfesional(@RequestHeader("token") String token){
+    public ResponseEntity<List<SolicitudesUsuarioDto>> getSolicitudesPendientesPorfesional(@RequestHeader("Authorization") String token){
         Integer idUsuario = jwtService.getIdUsuarioFromToken(token);
         return ResponseEntity.ok(solicitudesService.findSolicitudesPendientesByProfessionalId(idUsuario));
     }
 
     @GetMapping("/solicitud/usuario")
-    public ResponseEntity<List<SolicitudesProfesionalDto>> getSolicitudesUsuario(@RequestHeader("token") String token){
+    public ResponseEntity<List<SolicitudesProfesionalDto>> getSolicitudesUsuario(@RequestHeader("Authorization") String token){
         Integer idUsuario = jwtService.getIdUsuarioFromToken(token);
         return ResponseEntity.ok(solicitudesService.findSolicitudesByUserId(idUsuario));
     }
 
     @GetMapping("/solicitud/usuario/terminada")
-    public ResponseEntity<List<SolicitudesProfesionalDto>> getSolicitudesTerminadasUsuario(@RequestHeader("token") String token){
+    public ResponseEntity<List<SolicitudesProfesionalDto>> getSolicitudesTerminadasUsuario(@RequestHeader("Authorization") String token){
         Integer idUsuario = jwtService.getIdUsuarioFromToken(token);
         return ResponseEntity.ok(solicitudesService.findSolicitudesTerminadasByUserId(idUsuario));
     }
 
     @GetMapping("/solicitud/usuario/pendiente")
-    public ResponseEntity<List<SolicitudesProfesionalDto>> getSolicitudesPendientesUsuario(@RequestHeader("token") String token){
+    public ResponseEntity<List<SolicitudesProfesionalDto>> getSolicitudesPendientesUsuario(@RequestHeader("Authorization") String token){
         Integer idUsuario = jwtService.getIdUsuarioFromToken(token);
         return ResponseEntity.ok(solicitudesService.findSolicitudesPendientesByUserId(idUsuario));
     }
