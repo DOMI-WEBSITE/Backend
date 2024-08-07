@@ -28,14 +28,14 @@ public class UsuariosController {
         this.jwtService = jwtService;
         this.uploadFileService = uploadFileService;
     }
-    @PutMapping(value = "/usuario/{idUsuario}",consumes = "multipart/form-data")
-    public ResponseEntity<?> updatePerfil(@RequestPart("foto") MultipartFile foto, @RequestPart("portada") MultipartFile portada,@PathVariable Integer idUsuario, @RequestPart UsuariosDto usuariosDto) throws IOException {
+    @PutMapping(value = "/usuario",consumes = "multipart/form-data")
+    public ResponseEntity<?> updatePerfil(@RequestPart("foto") MultipartFile foto, @RequestPart("portada") MultipartFile portada,@RequestHeader("Authorization") String token, @RequestPart UsuariosDto usuariosDto) throws IOException {
         String nombreFoto = uploadFileService.saveFoto(foto);
         String nombrePortada = uploadFileService.savePortada(portada);
         usuariosDto.setFoto(nombreFoto);
         usuariosDto.setPortada(nombrePortada);
-        usuariosService.updatePerfil(idUsuario, usuariosDto);
-        return ResponseEntity.ok().body("Perfil actualizado!");
+        Integer idUsuario = jwtService.getIdUsuarioFromToken(token);
+        return ResponseEntity.ok().body(usuariosService.updatePerfil(idUsuario, usuariosDto));
     }
 
     @PutMapping("/usuario/password")
