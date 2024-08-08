@@ -39,6 +39,12 @@ public class SecurityConfig {
         return authenticationProvider;
     }
 
+    private static final String[] AUTH_WHITELIST = {
+            // -- Swagger UI v3 (OpenAPI)
+            "/swagger-ui/**",
+            "/v3/api-docs/**"
+    };
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception
     {
@@ -50,6 +56,7 @@ public class SecurityConfig {
                                 .requestMatchers("/api/password/**").permitAll()
                                 .requestMatchers("/static/IMG/**").permitAll()
                                 .requestMatchers("/api/servicio-profesion/**").permitAll()
+                                .requestMatchers(AUTH_WHITELIST).permitAll()
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(sessionManager->sessionManager

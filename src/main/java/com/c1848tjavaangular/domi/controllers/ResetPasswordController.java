@@ -2,6 +2,7 @@ package com.c1848tjavaangular.domi.controllers;
 
 import com.c1848tjavaangular.domi.services.ResetPasswordService;
 import com.c1848tjavaangular.domi.services.impl.EmailService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ public class ResetPasswordController {
         this.emailService = emailService;
     }
 
+    @Operation(summary = "Permite que un usuario recupere su password")
     @PostMapping("/forgot")
     public ResponseEntity<String> forgotPassword(@RequestParam String email) {
         String token = resetPassword.createPasswordResetToken(email);
@@ -29,6 +31,7 @@ public class ResetPasswordController {
         return ResponseEntity.ok("Password reset email sent");
     }
 
+    @Operation(summary = "Permite que el usuario restablezca su password")
     @PostMapping("/reset")
     public ResponseEntity<?> resetPassword(@RequestParam String token, @RequestParam String newPassword) {
         resetPassword.resetPassword(token, newPassword);
