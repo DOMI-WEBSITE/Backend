@@ -27,11 +27,11 @@ public class SwaggerConfig {
                         .version("1.0")
                         .description("API REST para unir profesionales con clientes.\n" +
                                 "\n" +
-                                "Los clientes pueden ver todos los profesionales que esten registrados, seleccionar uno o varios utilizando los filtros y viendo la experiencia y puntuacion.\n" +
+                                "Los clientes pueden ver todos los profesionales que esten registrados, seleccionar uno o varios utilizando los filtros de direcion, nombre del servicio.\n" +
                                 "\n" +
-                                "Los profesionales tienen un perfil donde describen todo lo que hacen por medio de testimonios, certificaciones, imágenes, precio y puntuacion.\n" +
+                                "Los profesionales tienen un perfil donde describen todo lo que hacen; su experiencia, sus trabajos realizados.\n" +
                                 "\n" +
-                                "Cuando el cliente elije un profesional se abre un chat donde coordinan el encuentro.")
+                                "Cuando el cliente elije un profesional le da en enviar solicitud, lo cual permite enviar un email al profesional con un link de WhatsApp para establecer una comunicación entre ambos.")
                         .termsOfService("http://github.com/DOMI-WEBSITE/Backend")
                         .license(new License().name("Apache 2.5.0").url("http://springdoc.org"))
                 )
