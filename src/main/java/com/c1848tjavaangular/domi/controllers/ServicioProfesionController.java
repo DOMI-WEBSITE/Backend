@@ -70,7 +70,7 @@ public class ServicioProfesionController {
         return ResponseEntity.ok(profesionales);
     }
 
-    @Operation(summary = "Permite a un profesional brindar sus servicios")
+    @Operation(summary = "Permite a un profesional publicar sus servicios", security = @SecurityRequirement(name = "bearerAuth"))
     @PostMapping("/servicio-profesion")
     public ResponseEntity<ServicioProfesionDto> save(@RequestHeader("Authorization") String token, @RequestBody ServicioProfesionDto servicioProfesionDto){
         Integer idUsuario = jwtService.getIdUsuarioFromToken(token);
@@ -104,7 +104,7 @@ public class ServicioProfesionController {
 
     }
 
-    @Operation(summary = "Permite que un profesional elimine servicio ofrecido")
+    @Operation(summary = "Permite a un profesional eliminar servicios ofrecidos",security = @SecurityRequirement(name = "bearerAuth"))
     @DeleteMapping("/servicio-profesion/{id}")
     public ResponseEntity<ServicioProfesionDto> delete(@PathVariable Integer id){
         return ResponseEntity.ok(servicioProfesionService.delete(id));
